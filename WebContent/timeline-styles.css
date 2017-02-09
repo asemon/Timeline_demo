@@ -1,4 +1,15 @@
 @CHARSET "ISO-8859-1";
-h1{
+
+h1 {
 	font-family: "Arial";
+}
+
+div.event1 {
+	background: #F03030 none !important; /* red */
+	border-color: #bd2828 !important; /* red */
+}
+
+div.event2 {
+	background: #1AA11A none !important; /* green */
+	border-color: #136e13 !important; /* green */
 }
