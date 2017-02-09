@@ -1,0 +1,47 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+	<link rel="stylesheet" type="text/css" href="timeline-styles.css" />
+	<h1>Timeline demo</h1>
+
+</h:head>
+<body>
+	<div>
+		<fieldset>
+
+			<p:timeline id="timeline" value="#{timelineController.model}"
+				selectable="#{timelineController.selectable}"
+				zoomable="#{timelineController.zoomable}"
+				moveable="#{timelineController.moveable}"
+				stackEvents="#{timelineController.stackEvents}"
+				axisOnTop="#{timelineController.axisOnTop}"
+				eventStyle="#{timelineController.eventStyle}"
+				showCurrentTime="#{timelineController.showCurrentTime}"
+				showNavigation="#{timelineController.showNavigation}"
+				zoomMin = "#{timelineController.zoomMin}"
+				end="#{timelineController.currentDate}"/>
+
+		</fieldset>
+		<h:form>
+			<h:panelGrid columns="2" cellpadding="5">
+				<p:outputLabel for="startdate" value="Start date:" />
+				<p:calendar id="startdate" pattern="dd-MM-yyyy" mask="true" value="#{timelineController.startDate}" required="true" />
+
+				<p:outputLabel for="enddate" value="End date:" />
+				<p:calendar id="enddate" pattern="dd-MM-yyyy" mask="true" value="#{timelineController.endDate}" required="false"/>
+
+				<p:outputLabel for="eventname" value="Event name:" />
+				<p:inputText id="eventname" value="#{timelineController.eventName}" required="true"/>
+
+			</h:panelGrid>
+			<p:commandButton value="Create event" id="btncreateevent" update="timeline" action="#{timelineController.createEvent}" type="submit" />
+		</h:form>
+	</div>
+</body>
+</html>
