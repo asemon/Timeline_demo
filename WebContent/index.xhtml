@@ -34,7 +34,7 @@
 					update="infoform" />
 			</p:timeline>
 			<h:form id="infoform">
-				<h:panelGrid id="panelgrid" columns="2" cellpadding="5">
+				<h:panelGrid id="panelgrid" columns="3" cellpadding="5">
 					<p:panelGrid id="leftpanel" columns="2"
 						style="height:200px;width:400px" cellpading="5">
 						<p:outputLabel for="startdate" value="Start date:" />
@@ -55,10 +55,21 @@
 						<h:outputText value="#{timelineController.infoText}" />
 
 					</p:panel>
+					<p:panelGrid id="selectview" header="View options"
+						style="height:200px;width:400px" columns="2">	
+						<p:selectOneRadio id="selectviewradio"
+							value="#{timelineController.viewMode}">
+							<f:selectItem itemLabel="MONTH" itemValue="monthSelected"></f:selectItem>
+							<f:selectItem itemLabel="QUARTER" itemValue="quarterSelected"></f:selectItem>
+							<f:selectItem itemLabel="YEAR" itemValue="yearSelected"></f:selectItem>
+							<p:ajax process="@this" update="timeline" listener="#{timelineController.changeViewMode}"/>
+						</p:selectOneRadio>
+
+					</p:panelGrid>
 				</h:panelGrid>
 				<p:commandButton value="Create event" id="btncreateevent"
-					update="timeline, infoform" action="#{timelineController.createEvent}"
-					type="submit" />
+					update="timeline, infoform"
+					action="#{timelineController.createEvent}" type="submit" />
 			</h:form>
 
 		</fieldset>

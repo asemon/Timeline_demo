@@ -8,14 +8,14 @@ import java.util.List;
 
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.ViewScoped;
+import javax.faces.bean.SessionScoped;
 
 import org.primefaces.event.timeline.TimelineSelectEvent;
 import org.primefaces.model.timeline.TimelineEvent;
 import org.primefaces.model.timeline.TimelineModel;
 
 @ManagedBean(name = "timelineController")
-@ViewScoped
+@SessionScoped
 public class TimelineController implements Serializable {
 
 	/**
@@ -44,6 +44,7 @@ public class TimelineController implements Serializable {
 	private Date					minDate				= createGenericDate(01, 01, 1900);
 	private Date					maxDate				= createGenericDate(12, 31, 2100);
 	private String					infoText			= "Info on chosen event will be displayed here...";
+	private String					viewMode			= "month";
 
 	// protected static DateFormat dateFormatter = new
 	// SimpleDateFormat("dd.MM.yy hh:mm");
@@ -278,6 +279,32 @@ public class TimelineController implements Serializable {
 				+ "\nEnd date: " + event.getEndDate().toString();
 		this.infoText = infoMsg;
 		return infoMsg;
+	}
+
+	public String getViewMode() {
+		return viewMode;
+	}
+
+	public void setViewMode(String viewMode) {
+		this.viewMode = viewMode;
+	}
+
+	public void changeViewMode() {
+		String selectedMode = this.viewMode;
+		switch (selectedMode) {
+			case "monthSelected":
+				this.setZoomMin(31536000000L);
+				this.setZoomMax(31536000000L);
+				break;
+			case "yearSelected":
+				this.setZoomMin(315360000000L);
+				this.setZoomMax(315360000000L);
+				break;
+			case "quarterSelected":
+				this.setZoomMin(173448000000L);
+				this.setZoomMax(173448000000L);
+				break;
+		}
 	}
 
 }
